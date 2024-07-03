@@ -26,34 +26,11 @@ FUNCTION_APP_NAME="fn-greetings-javascript"
 az functionapp config appsettings set \
     --name "${FUNCTION_APP_NAME}" \
     --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_APP_NAME=${NEW_RELIC_APP_NAME}"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_LOG_LEVEL=info"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_LOG_ENABLED=true"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=false"
-
-az functionapp config appsettings set \
-    --name "${FUNCTION_APP_NAME}" \
-    --resource-group "${RESOURCE_GROUP_NAME}" \
-    --settings "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=false"
+    --settings \
+        "NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}" \
+        "NEW_RELIC_APP_NAME=${NEW_RELIC_APP_NAME}" \
+        "NEW_RELIC_LOG_LEVEL=info" \
+        "NEW_RELIC_LOG_ENABLED=true" \
+        "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true" \
+        "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=false" \
+        "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=false"

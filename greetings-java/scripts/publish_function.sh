@@ -7,4 +7,6 @@
 # Create a function app
 FUNCTION_APP_NAME="fn-greetings-java"
 
-func azure functionapp publish "${FUNCTION_APP_NAME}"
+mvn clean package
+
+mvn azure-functions:deploy
