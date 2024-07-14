@@ -1,6 +1,9 @@
-# Sample System: Azure Function
+![Sample-Code](https://gitlab.com/softbutterfly/open-source/open-source-office/-/raw/master/assets/dynova/dynova-open-source--banner--sample-code.png)
 
-## Overview
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE.txt)
+
+# Sample System: Azure Function
 
 This repository contains many sample Azure Functions that demonstrate how to
 implement the New Relic agent in an Azure Function.
