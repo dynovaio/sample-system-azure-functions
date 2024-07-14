@@ -77,7 +77,7 @@ public class Function {
         }
     }
 
-    void logRuntimeEnvironment(ExecutionContext context) {
+    void logRuntimeEnvironment(ExecutionContext context) throws IOException  {
         final String executionPath =  System.getProperty("user.dir");
         final String executionPathMessage = String.format("Execution path: %s", executionPath);
         context.getLogger().info(executionPathMessage);
@@ -100,8 +100,11 @@ public class Function {
 
     void logNewRelicSettings(ExecutionContext context) {
         Config config = NewRelic.getAgent().getConfig();
-        for (Map.Entry<String, String> entry : config.getValueMap().entrySet()) {
-            context.getLogger().info(entry.getKey() + ": " + entry.getValue());
-        }
+        String app_name = config.getValue("newrelic.config.app_name");
+        String license_key = config.getValue("newrelic.config.license_key");
+
+        context.getLogger().info("New Relic Settings");
+        context.getLogger().info("App Name: " + app_name);
+        context.getLogger().info("License Key: " + license_key);
     }
 }

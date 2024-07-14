@@ -3,25 +3,28 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE.txt)
 
-# Sample System: Azure Function
+# Sample System: Azure Function Apps
 
-This repository contains many sample Azure Functions that demonstrate how to
-implement the New Relic agent in an Azure Function.
+This repository contains many sample Azure Function Apps that demonstrate how to
+implement the New Relic agent within Azure Function App.
 
-By default New Relic does not support Azure Functions, but it is possible to
-use the New Relic agent in an Azure Function by using the New Relic agent API. This repository contains examples of how to use the New Relic agent API for functions written in Java, JavaScript and TypeScript.
+By default New Relic does not support Azure Function Apps, but it is possible
+to use the New Relic agent in an Azure Function by using the New Relic agent
+API. This repository contains examples of how to use the New Relic agent API
+for functions written in Java, JavaScript and TypeScript.
 
 ## Requirements
 
 In order to run the samples in this repository, you will need the following
 tools:
 
-* sdkman [↗][href:sdkman]
-* nvm [↗][href:nvm]
-* Azure Functions Core Tools [↗][href:azfct]
-* Azure CLI [↗][href:azcli]
-* New Relic account [↗][href:newrelic]
-* Visual Studio Code (VSCode) with the Azure Functions extension
+* sdkman ([↗][href:sdkman])
+* nvm ([↗][href:nvm])
+* Azure Functions Core Tools ([↗][href:azfct])
+* Azure CLI ([↗][href:azcli])
+* New Relic account ([↗][href:newrelic])
+* Visual Studio Code ([VSCode ↗][href:vscode]) with the Azure Functions
+extension
 
 ## Directory Structure
 
@@ -104,12 +107,12 @@ Sugestions and contributions are welcome!
 
 > Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
 
-For more information, please refer to the [Code of Conduct][href:code_of_conduct].
+For more information, please refer to the [Code of Conduct ↗][href:code_of_conduct].
 
 ## License
 
-This project is licensed under the terms of the BSD-3-Clause
-[↗][href:license] license.
+This project is licensed under the terms of the [BSD-3-Clause
+↗][href:license] license.
 
 [href:sdkman]: https://sdkman.io/
 [href:nvm]: https://github.com/nvm-sh/nvm
@@ -118,3 +121,4 @@ This project is licensed under the terms of the BSD-3-Clause
 [href:newrelic]: https://newrelic.com/signup
 [href:license]: LICENSE.txt
 [href:code_of_conduct]: CODE_OF_CONDUCT.md
+[href:vscode]: https://code.visualstudio.com
