@@ -1,0 +1,18 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "NEW_RELIC_LICENSE_KEY": "new_relic_license_key",
+    "NEW_RELIC_APP_NAME": "new_relic_app_name",
+    "NEW_RELIC_AGENT_ENABLED": "new_relic_agent_enabled",
+    "NEW_RELIC_LOG_LEVEL": "new_relic_log_level",
+    "NEW_RELIC_LOG_ENABLED": "new_relic_log_enabled",
+    "NEW_RELIC_LOG_FILE_NAME": "new_relic_log_file_name",
+    "NEW_RELIC_DISTIBUTED_TRACING_ENABLED": "new_relic_distibuted_tracing_enabled",
+    "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED": "new_relic_application_logging_forwarding_enabled",
+    "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED": "new_relic_application_logging_local_decorating_enabled",
+    "languageWorkers__java__arguments": "languageworkers__java__arguments",
+    "WEBSITE_USE_PLACEHOLDER": "website_use_placeholder"
+  }
+}
