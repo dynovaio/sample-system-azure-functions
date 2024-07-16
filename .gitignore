@@ -2,3 +2,4 @@
 !.gitignore
 !.funcignore
 !.nvmrc
+!.vscode/sample-system-azure-functions.code-workspace
