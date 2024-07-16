@@ -1,22 +1,21 @@
-# Sample Java
+# Sample Typescript
 
-This repository contains a sample Azure Function written in Java that
-demonstrates how to implement the New Relic APM agent for Java within an Azure
-Function App.
+This repository contains a sample Azure Function written in Typescript that
+demonstrates how to implement the New Relic APM agent for Typescript within
+an Azure Function App.
 
 ## Requirements
 
 ### Recommended Tools
 
-* sdkman ([↗][href:sdkman])
+* nvm ([↗][href:sdkman])
 * Azure Functions Core Tools ([↗][href:azfct])
 * Visual Studio Code ([VSCode ↗][href:vscode]) with the Azure Functions
   extension.
 
 ### Required Tools
 
-* Java 17
-* Maven 3.9
+* Node JS 18+
 
 ## Local developement
 
@@ -24,7 +23,7 @@ To run the sample locally, follow these steps:
 
 1. Clone this repository to your local machine.
 
-2. Open a terminal and navigate to the `sample-java` directory.
+2. Open a terminal and navigate to the `sample-typescript` directory.
 
 3. Copy the `template.settings.json` file to `local.settings.json` and update
     the values of the variables according to your requirements.
@@ -33,24 +32,23 @@ To run the sample locally, follow these steps:
    cp template.settings.json local.settings.json
    ```
 
-3. Install the required tools. Assuming you have `sdkman` installed, you can
-    install Java 17 and Maven 3.9 by running the following commands:
+3. Install the required tools. Assuming you have `nvm` installed, you can
+    install node 18 by running the following commands:
 
    ```bash
-   sdk install java 17.0.11-tem
-   sdk install maven 3.9.8
+   nvm install $(cat .nvmrc)
    ```
 
 4. Run for local development
 
    ```bash
-   sdk use java 17.0.11-tem
-   sdk use maven 3.9.8
+   nvm use $(cat .nvmrc)
 
-   mvn azure-functions:run
+   npm run start
    ```
 
-5. Open a browser and navigate to `http://localhost:7071/api/fnsamplejava`.
+5. Open a browser and navigate to
+    `http://localhost:7071/api/fnsampletypescript`.
 
 6. Test the function by sending a request to the endpoint.
 
@@ -58,7 +56,7 @@ To run the sample locally, follow these steps:
    for i in `seq 1 10`; do
        curl \
            --request GET \
-           --url http://localhost:7071/api/fnsamplejava?name=Azure \
+           --url http://localhost:7071/api/fnsampletypescript?name=Azure \
            --header 'Content-Type: application/json';
        echo "";
        sleep 1;
@@ -79,9 +77,9 @@ To deploy the sample to Azure, follow these steps:
 
    ```bash
    # Do not modify the values of the variables
-   project_name="sample-java"
-   function_app_runtime="java"
-   function_app_runtime_version="17"
+   project_name="sample-typescript"
+   function_app_runtime="node"
+   function_app_runtime_version="18"
 
    # Modify the values of the variables according to your requirements
    location="eastus"
@@ -121,6 +119,6 @@ To deploy the sample to Azure, follow these steps:
        $execution_interval
    ```
 
-[href:sdkman]: https://sdkman.io/
+[href:nvm]: https://github.com/nvm-sh/nvm
 [href:azfct]: https://github.com/Azure/azure-functions-core-tools
 [href:vscode]: https://code.visualstudio.com

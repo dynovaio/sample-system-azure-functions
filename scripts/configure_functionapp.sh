@@ -90,6 +90,20 @@ if [ "${FUNCTION_APP_RUNTIME}" == "java" ]; then
             "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=true" \
             "languageWorkers__java__arguments=-javaagent:/home/site/wwwroot/lib/newrelic-agent-8.12.0.jar" \
             "WEBSITE_USE_PLACEHOLDER=0"
+elif [ "${FUNCTION_APP_RUNTIME}" == "node" ]; then
+    az functionapp config appsettings set \
+        --name "${FUNCTION_APP_NAME}" \
+        --resource-group "${RESOURCE_GROUP_NAME}" \
+        --settings \
+            "NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}" \
+            "NEW_RELIC_APP_NAME=${FUNCTION_APP_NAME}" \
+            "NEW_RELIC_AGENT_ENABLED=true" \
+            "NEW_RELIC_LOG_LEVEL=info" \
+            "NEW_RELIC_LOG_ENABLED=true" \
+            "NEW_RELIC_LOG_FILE_NAME=stdout" \
+            "NEW_RELIC_DISTIBUTED_TRACING_ENABLED=true" \
+            "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=false" \
+            "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=true"
 else
     echo "[ERR] Unsupported function runtime '${FUNCTION_APP_RUNTIME}'."
     exit 1

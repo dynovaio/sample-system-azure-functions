@@ -76,6 +76,11 @@ if [ "${function_app_runtime}" == "java" ]; then
     mvn clean package
 
     mvn azure-functions:deploy -DresourceGroup="${RESOURCE_GROUP_NAME}"
+elif [ "${function_app_runtime}" == "node" ]; then
+    # Publish function app
+    cd "${FUNCTION_APP_NAME}"
+
+    func azure functionapp publish "${FUNCTION_APP_NAME}"
 else
     echo "[ERR] Unsupported function runtime '${function_app_runtime}'."
     exit 1

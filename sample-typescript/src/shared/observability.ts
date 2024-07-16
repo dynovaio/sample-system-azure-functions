@@ -191,7 +191,7 @@ export function instrumentKnex(shim, knex) {
             builder: shim.FIRST
         }
     );
-};
+}
 
 export function instrumentAzureFuntionsInvocationContext(shim: any, azureFunctions: any) {
     const agent = shim.agent
