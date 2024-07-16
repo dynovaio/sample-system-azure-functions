@@ -71,14 +71,14 @@ fi
 # Publish function app
 if [ "${function_app_runtime}" == "java" ]; then
     # Publish function app
-    cd "${FUNCTION_APP_NAME}"
+    cd "${PROJECT_NAME}"
 
     mvn clean package
 
     mvn azure-functions:deploy -DresourceGroup="${RESOURCE_GROUP_NAME}"
 elif [ "${function_app_runtime}" == "node" ]; then
     # Publish function app
-    cd "${FUNCTION_APP_NAME}"
+    cd "${PROJECT_NAME}"
 
     func azure functionapp publish "${FUNCTION_APP_NAME}"
 else
