@@ -91,8 +91,11 @@ if [ "${function_app_runtime}" == "java" ]; then
         -DfunctionAppNameToDeploy="${FUNCTION_APP_NAME}" \
         -DresourceGroup="${RESOURCE_GROUP_NAME}"
 elif [ "${function_app_runtime}" == "node" ]; then
-    # Build
-    npm run build
+    # Check if there is a tsconfig.json file
+    if [ -f tsconfig.json ]; then
+        # Build
+        npm run build
+    fi
 
     # Publish
     func azure functionapp publish "${FUNCTION_APP_NAME}" \

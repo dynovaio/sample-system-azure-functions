@@ -1,7 +1,7 @@
-# Sample TypeScript
+# Sample JavaScript
 
-This repository contains a sample Azure Function written in TypeScript that
-demonstrates how to implement the New Relic APM agent for TypeScript within
+This repository contains a sample Azure Function written in JavaScript that
+demonstrates how to implement the New Relic APM agent for JavaScript within
 an Azure Function App.
 
 ## Requirements
@@ -23,7 +23,7 @@ To run the sample locally, follow these steps:
 
 1. Clone this repository to your local machine.
 
-2. Open a terminal and navigate to the `sample-typescript` directory.
+2. Open a terminal and navigate to the `sample-javascript` directory.
 
 3. Copy the `template.settings.json` file to `local.settings.json` and update
     the values of the variables according to your requirements.
@@ -48,7 +48,7 @@ To run the sample locally, follow these steps:
    ```
 
 5. Open a browser and navigate to
-    `http://localhost:7071/api/fnsampletypescript`.
+    `http://localhost:7071/api/fnsamplejavascript`.
 
 6. Test the function by sending a request to the endpoint.
 
@@ -56,7 +56,7 @@ To run the sample locally, follow these steps:
    for i in `seq 1 10`; do
        curl \
            --request GET \
-           --url http://localhost:7071/api/fnsampletypescript?name=Azure \
+           --url http://localhost:7071/api/fnsamplejavascript?name=Azure \
            --header 'Content-Type: application/json';
        echo "";
        sleep 1;
@@ -77,8 +77,8 @@ To deploy the sample to Azure, follow these steps:
 
    ```bash
    # Do not modify the values of the variables
-   project_name="sample-typescript"
-   function_name="fnsampletypescript"
+   project_name="sample-javascript"
+   function_name="fnsamplejavascript"
    function_app_runtime="node"
    function_app_runtime_version="20"
 

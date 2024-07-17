@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../sample-java"
+		},
+		{
+			"path": "../sample-javascript"
 		}
 	],
 	"settings": {
