@@ -120,4 +120,4 @@ else
     exit 1
 fi
 
-echo "[INFO] Function app ${FUNCTION_APP_NAME} configured successfully."
+echo "[INFO] Function app '${FUNCTION_APP_NAME}' configured successfully."
