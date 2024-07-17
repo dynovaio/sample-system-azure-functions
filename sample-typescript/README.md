@@ -8,7 +8,7 @@ an Azure Function App.
 
 ### Recommended Tools
 
-* nvm ([↗][href:sdkman])
+* nvm ([↗][href:nvm])
 * Azure Functions Core Tools ([↗][href:azfct])
 * Visual Studio Code ([VSCode ↗][href:vscode]) with the Azure Functions
   extension.
