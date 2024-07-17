@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../sample-javascript"
+		},
+		{
+			"path": "../sample-typescript2"
 		}
 	],
 	"settings": {
