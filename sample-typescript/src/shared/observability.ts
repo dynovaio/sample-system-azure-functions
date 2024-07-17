@@ -1,5 +1,4 @@
 import * as newrelic from 'newrelic';
-import { isApplicationLoggingEnabled } from 'newrelic/lib/util/application-logging';
 
 export function wrapAsWebTransaction(url: string, handler: Function) {
     function wrappedHandler() {
