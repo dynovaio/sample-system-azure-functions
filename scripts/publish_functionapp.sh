@@ -84,11 +84,11 @@ FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
 if [ "${function_app_runtime}" == "java" ]; then
     # Build
     mvn clean package \
-        -DfunctionAppName="${FUNCTION_APP_NAME}"
+        -DfunctionAppNameToDeploy="${FUNCTION_APP_NAME}"
 
     # Publish
     mvn azure-functions:deploy \
-        -DfunctionAppName="${FUNCTION_APP_NAME}" \
+        -DfunctionAppNameToDeploy="${FUNCTION_APP_NAME}" \
         -DresourceGroup="${RESOURCE_GROUP_NAME}"
 elif [ "${function_app_runtime}" == "node" ]; then
     # Build
