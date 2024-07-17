@@ -83,16 +83,20 @@ FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
 
 if [ "${function_app_runtime}" == "java" ]; then
     # Build
-    mvn clean package
+    mvn clean package \
+        -DfunctionAppName="${FUNCTION_APP_NAME}"
 
     # Publish
-    mvn azure-functions:deploy -DresourceGroup="${RESOURCE_GROUP_NAME}"
+    mvn azure-functions:deploy \
+        -DfunctionAppName="${FUNCTION_APP_NAME}" \
+        -DresourceGroup="${RESOURCE_GROUP_NAME}"
 elif [ "${function_app_runtime}" == "node" ]; then
     # Build
     npm run build
 
     # Publish
-    func azure functionapp publish "${FUNCTION_APP_NAME}" --build local
+    func azure functionapp publish "${FUNCTION_APP_NAME}" \
+        --build local
 else
     echo "[ERR] Unsupported function runtime '${function_app_runtime}'."
     exit 1
