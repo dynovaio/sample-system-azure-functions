@@ -78,6 +78,7 @@ To deploy the sample to Azure, follow these steps:
    ```bash
    # Do not modify the values of the variables
    project_name="sample-typescript"
+   function_name="fnsampletypescript"
    function_app_runtime="node"
    function_app_runtime_version="18"
 

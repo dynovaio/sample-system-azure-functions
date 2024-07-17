@@ -80,6 +80,7 @@ To deploy the sample to Azure, follow these steps:
    ```bash
    # Do not modify the values of the variables
    project_name="sample-java"
+   function_name="fnsamplejava"
    function_app_runtime="java"
    function_app_runtime_version="17"
 
