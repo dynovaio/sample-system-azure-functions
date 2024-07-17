@@ -68,19 +68,31 @@ fi
 # Execution:
 # ----------
 
-# Publish function app
-if [ "${function_app_runtime}" == "java" ]; then
-    # Publish function app
-    cd "${PROJECT_NAME}"
+# Get random suffix from .random_sufix file or generate a new one
+cd $PROJECT_NAME
 
+if [ -f .random_suffix ]; then
+    RANDOM_SUFFIX=$(cat .random_suffix)
+else
+    RANDOM_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+    echo "${RANDOM_SUFFIX}" > .random_suffix
+fi
+
+# Publish function app
+FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+
+if [ "${function_app_runtime}" == "java" ]; then
+    # Build
     mvn clean package
 
+    # Publish
     mvn azure-functions:deploy -DresourceGroup="${RESOURCE_GROUP_NAME}"
 elif [ "${function_app_runtime}" == "node" ]; then
-    # Publish function app
-    cd "${PROJECT_NAME}"
+    # Build
+    npm run build
 
-    func azure functionapp publish "${FUNCTION_APP_NAME}"
+    # Publish
+    func azure functionapp publish "${FUNCTION_APP_NAME}" --build local
 else
     echo "[ERR] Unsupported function runtime '${function_app_runtime}'."
     exit 1

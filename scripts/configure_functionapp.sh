@@ -42,7 +42,6 @@ if [ -z "$1" ]; then
     exit 1
 else
     PROJECT_NAME="$1"
-    FUNCTION_APP_NAME="fn-${PROJECT_NAME}"
 fi
 
 # Check if the function app runtime is provided
@@ -73,7 +72,19 @@ fi
 # Execution:
 # ----------
 
+# Get random suffix from .random_sufix file or generate a new one
+cd $PROJECT_NAME
+
+if [ -f .random_suffix ]; then
+    RANDOM_SUFFIX=$(cat .random_suffix)
+else
+    RANDOM_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+    echo "${RANDOM_SUFFIX}" > .random_suffix
+fi
+
 # Configure the function app settings
+FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+
 if [ "${FUNCTION_APP_RUNTIME}" == "java" ]; then
     az functionapp config appsettings set \
         --name "${FUNCTION_APP_NAME}" \
@@ -89,7 +100,7 @@ if [ "${FUNCTION_APP_RUNTIME}" == "java" ]; then
             "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=false" \
             "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=true" \
             "languageWorkers__java__arguments=-javaagent:/home/site/wwwroot/lib/newrelic-agent-8.12.0.jar" \
-            "WEBSITE_USE_PLACEHOLDER=0"
+            "WEBSITE_USE_PLACEHOLDER=0" > /dev/null 2>&1
 elif [ "${FUNCTION_APP_RUNTIME}" == "node" ]; then
     az functionapp config appsettings set \
         --name "${FUNCTION_APP_NAME}" \
@@ -103,8 +114,10 @@ elif [ "${FUNCTION_APP_RUNTIME}" == "node" ]; then
             "NEW_RELIC_LOG_FILE_NAME=stdout" \
             "NEW_RELIC_DISTIBUTED_TRACING_ENABLED=true" \
             "NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=false" \
-            "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=true"
+            "NEW_RELIC_APPLICATION_LOGGING_LOCAL_DECORATING_ENABLED=true" > /dev/null 2>&1
 else
     echo "[ERR] Unsupported function runtime '${FUNCTION_APP_RUNTIME}'."
     exit 1
 fi
+
+echo "[INFO] Function app ${FUNCTION_APP_NAME} configured successfully."

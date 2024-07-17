@@ -51,7 +51,6 @@ if [ -z "$1" ]; then
     exit 1
 else
     PROJECT_NAME="$1"
-    FUNCTION_APP_NAME="fn-${PROJECT_NAME}"
 fi
 
 # Check if function app runtime is provided
@@ -90,8 +89,20 @@ fi
 # Execution:
 # ----------
 
+# Get random suffix from .random_sufix file or generate a new one
+cd $PROJECT_NAME
+
+if [ -f .random_suffix ]; then
+    RANDOM_SUFFIX=$(cat .random_suffix)
+else
+    RANDOM_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+    echo "${RANDOM_SUFFIX}" > .random_suffix
+fi
+
 # Create storage account
-STORAGE_ACCOUNT_NAME="sa$(echo ${PROJECT_NAME} | sed 's/[ -_]//g')data"
+STORAGE_ACCOUNT_NAME="$(echo "${PROJECT_NAME}" | sed 's/[ -_]//g')"
+STORAGE_ACCOUNT_NAME="sa${STORAGE_ACCOUNT_NAME}data${RANDOM_SUFFIX}"
+STORAGE_ACCOUNT_NAME="$(echo "${STORAGE_ACCOUNT_NAME}" | fold -w 24 | head -n 1)"
 
 az storage account create \
     --name "${STORAGE_ACCOUNT_NAME}" \
@@ -107,7 +118,7 @@ else
 fi
 
 # Create app insights
-APP_INSIGHTS_NAME="ai$(echo ${PROJECT_NAME} | sed 's/[ -_]//g')"
+APP_INSIGHTS_NAME="ai$(echo ${PROJECT_NAME} | sed 's/[ -_]//g')${RANDOM_SUFFIX}"
 
 az monitor app-insights component create \
     --app "${APP_INSIGHTS_NAME}" \
@@ -131,6 +142,8 @@ APP_INSIGHTS_INSTRUMENTATION_KEY=$(
 )
 
 # Create function app
+FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+
 az functionapp create \
     --name "${FUNCTION_APP_NAME}" \
     --storage-account "${STORAGE_ACCOUNT_NAME}" \
@@ -144,6 +157,7 @@ az functionapp create \
     --os-type "Linux" > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
+    sleep 10
     echo "[INFO] Function app '${FUNCTION_APP_NAME}' created successfully."
     exit 0
 else

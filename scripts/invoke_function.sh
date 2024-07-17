@@ -52,7 +52,6 @@ if [ -z "$1" ]; then
     exit 1
 else
     PROJECT_NAME="$1"
-    FUNCTION_APP_NAME="fn-${PROJECT_NAME}"
 fi
 
 # Check if function name is provided
@@ -91,7 +90,19 @@ fi
 # Execution:
 # ----------
 
+# Get random suffix from .random_sufix file or generate a new one
+cd $PROJECT_NAME
+
+if [ -f .random_suffix ]; then
+    RANDOM_SUFFIX=$(cat .random_suffix)
+else
+    RANDOM_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+    echo "${RANDOM_SUFFIX}" > .random_suffix
+fi
+
 # Get Function App URL
+FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+
 FUNCTION_APP_URL=$(
     az functionapp function show \
         --name "${FUNCTION_APP_NAME}" \

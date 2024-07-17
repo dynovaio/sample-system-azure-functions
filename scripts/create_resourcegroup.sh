@@ -58,11 +58,10 @@ fi
 
 # Check if resource group already exists
 az group show \
-    --name "${RESOURCE_GROUP_NAME}" \
-    --location "${LOCATION}" > /dev/null 2>&1
+    --name "${RESOURCE_GROUP_NAME}" > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "[ERR] Resource group '${RESOURCE_GROUP_NAME}' already exists."
+    echo "[WARN] Resource group '${RESOURCE_GROUP_NAME}' already exists."
     exit 1
 fi
 
