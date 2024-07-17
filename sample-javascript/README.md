@@ -1,4 +1,6 @@
-# Sample JavaScript
+![Dynova](https://gitlab.com/softbutterfly/open-source/open-source-office/-/raw/master/assets/dynova/dynova-header-1.png)
+
+# JavaScript Sample
 
 This repository contains a sample Azure Function written in JavaScript that
 demonstrates how to implement the New Relic APM agent for JavaScript within

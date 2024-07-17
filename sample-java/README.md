@@ -1,4 +1,6 @@
-# Sample Java
+![Dynova](https://gitlab.com/softbutterfly/open-source/open-source-office/-/raw/master/assets/dynova/dynova-header-1.png)
+
+# Java Sample
 
 This repository contains a sample Azure Function written in Java that
 demonstrates how to implement the New Relic APM agent for Java within an Azure
