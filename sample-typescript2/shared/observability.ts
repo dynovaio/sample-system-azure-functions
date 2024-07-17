@@ -192,7 +192,8 @@ export function instrumentKnex(shim, knex) {
     );
 }
 
-export function instrumentAzureFuntionsInvocationContext(shim: any, azureFunctions: any) {
+export function instrumentAzureFuntionsInvocationContext(shim: any, module: any) {
+    console.log(module);
     const agent = shim.agent
     const config = agent.config
 
@@ -201,13 +202,8 @@ export function instrumentAzureFuntionsInvocationContext(shim: any, azureFunctio
         return
     }
 
-    const contextPrototype = azureFunctions.InvocationContext.prototype;
+    const contextPrototype = module.InvocationContext.prototype;
     const logFunctions = ['log', 'trace', 'debug', 'info', 'warn', 'error']
-
-    const hasSubtitutionPlaceHolders = (message: string): boolean => {
-        const placeholders = ['%o', '%O', '%d', '%i', '%f', '%s', '%c'];
-        return placeholders.some((placeholder) => message.includes(placeholder));
-    }
 
     logFunctions.forEach(function (logFunctionName: string) {
         shim.wrap(
@@ -234,11 +230,22 @@ export function instrumentAzureFuntionsInvocationContext(shim: any, azureFunctio
 }
 
 export const patchContext = (context: any): any => {
+    const agent = newrelic?.agent;
+    const config = agent?.config;
+
+    if (agent === undefined) {
+        return context;
+    }
+
+    if (!config?.application_logging?.enabled || (config?.application_logging?.enabled && !config?.application_logging?.local_decorating?.enabled)) {
+        return context;
+    }
+
     const oldLogger = context.log;
 
     const logWithLogger = (logger: Function, ...args: any[]) => {
         let [head, ...tail] = args;
-        const newrelicMetadata = newrelic.agent.getNRLinkingMetadata()
+        const newrelicMetadata = newrelic?.agent?.getNRLinkingMetadata()
 
         if (hasSubtitutionPlaceHolders(head)) {
             head = `${head}${newrelicMetadata}`
