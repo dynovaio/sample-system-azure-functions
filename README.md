@@ -21,6 +21,8 @@ tools:
 
 * sdkman ([↗][href:sdkman])
 * nvm ([↗][href:nvm])
+* docker ([↗][href:docker])
+* docker-compose ([↗][href:docker-compose])
 * Azure Functions Core Tools ([↗][href:azfct])
 * Azure CLI ([↗][href:azcli])
 * New Relic account ([↗][href:newrelic])
@@ -121,6 +123,8 @@ This project is licensed under the terms of the [BSD-3-Clause
 
 [href:sdkman]: https://sdkman.io/
 [href:nvm]: https://github.com/nvm-sh/nvm
+[href:docker]: https://docs.docker.com/get-docker/
+[href:docker-compose]: https://docs.docker.com/compose/install/
 [href:azfct]: https://github.com/Azure/azure-functions-core-tools
 [href:azcli]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [href:newrelic]: https://newrelic.com/signup

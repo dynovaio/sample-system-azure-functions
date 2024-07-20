@@ -7,7 +7,7 @@ const azureFunctionsModule = require('@azure/functions');
 import { Context, HttpRequest } from "@azure/functions"
 
 class HttpTrigger {
-    static function = wrapAsWebTransaction('HttpTrigger1', HttpTrigger.handler);
+    static function = wrapAsWebTransaction('fnsamplebase', HttpTrigger.handler);
 
     static async handler(context: Context, req: HttpRequest): Promise<void> {
         console.log(azureFunctionsModule.prototype);
