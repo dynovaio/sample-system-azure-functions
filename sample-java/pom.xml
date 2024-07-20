@@ -40,7 +40,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- http://mvnrepository.com/artifact/com.newrelic.agent.java/newrelic-agent -->
+        <!--
+            New Relic Dependencies
+            https://mvnrepository.com/artifact/com.newrelic.agent.java
+        -->
         <dependency>
             <groupId>com.newrelic.agent.java</groupId>
             <artifactId>newrelic-agent</artifactId>
