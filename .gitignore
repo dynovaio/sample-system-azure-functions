@@ -6,3 +6,4 @@ _*
 !.vscode/sample-system-azure-functions.code-workspace
 !_config.yml
 !_toc.yml
+!.github
