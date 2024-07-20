@@ -50,8 +50,7 @@ To run the sample locally, follow these steps:
    npm run start
    ```
 
-5. Open a browser and navigate to
-    `http://localhost:7071/api/fnsamplejavascript`.
+5. Open a browser and navigate to `http://localhost:7071/api/fnsamplebase`.
 
 6. Test the function by sending a request to the endpoint.
 
@@ -59,7 +58,7 @@ To run the sample locally, follow these steps:
    for i in `seq 1 10`; do
        curl \
            --request GET \
-           --url http://localhost:7071/api/fnsamplejavascript?name=Azure \
+           --url http://localhost:7071/api/fnsamplebase?name=Azure \
            --header 'Content-Type: application/json';
        echo "";
        sleep 1;
@@ -80,7 +79,7 @@ To deploy the sample to Azure, follow these steps:
 
     ```bash
     # Do not modify the values of the variables
-    project_name="@azure-functions@v4"
+    project_name="sample-javascript@azure-functions@v4"
     function_app_runtime="node"
     function_app_runtime_version="20"
 
