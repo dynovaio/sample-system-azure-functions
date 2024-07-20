@@ -31,8 +31,10 @@ The following example shows how the `wrapAsWebTransaction` is used in the
 ```javascript
 const { wrapAsWebTransaction } = require('../shared/observability');
 
+// ... your other imports
+
 const handler = async (context, req) => {
-    // Your function code here
+    // ... your function code here
 };
 
 app.http('fnsamplebase', {
@@ -64,6 +66,8 @@ const { wrapAsWebTransaction } = require('../shared/observability');
 const { azureFunctionsInstrumentation } = require('../shared/observability/instrumentations');
 newrelic.instrument('@azure/functions', azureFunctionsInstrumentation);
 
+// ... your other imports
+
 const handler = async (context, req) => {
     context.log(`Http function processed request for url "${request.url}"`)
     context.trace(`Http function processed request for url "${request.url}"`)
@@ -72,7 +76,7 @@ const handler = async (context, req) => {
     context.error(`Http function processed request for url "${request.url}"`)
     context.warn(`Http function processed request for url "${request.url}"`)
 
-    // Your function code here
+    // ... your function code here
 };
 
 app.http('fnsamplecontextlogs', {
@@ -93,7 +97,32 @@ To be done
 
 #### What about `console.log`?
 
-To be done
+If you are using the `console.log` function to log messages, you can use the
+`getNRLinkingMetadata`function from the New Relic Agent API to add the New Relic
+enrichments to the log messages.
+
+Look at `fnsamplelogconsole.js` for an example.
+
+```javascript
+const newrelic = require('newrelic');
+
+// ... your other imports
+
+const handler = async (context, req) => {
+    console.log(
+        'Http function processed request for url "${request.url}"',
+        newrelic.getNRLinkingMetadata()
+    );
+
+    // ... your function code here
+};
+
+app.http('fnsamplelogconsole', {
+    methods: ['GET'],
+    authLevel: 'anonymous',
+    handler: wrapAsWebTransaction('/fnsamplelogconsole', handler),
+});
+```
 
 ### Sotrage and segments
 

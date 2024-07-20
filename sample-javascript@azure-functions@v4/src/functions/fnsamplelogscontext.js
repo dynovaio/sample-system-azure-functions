@@ -18,8 +18,8 @@ const handler = async (request, context) => {
     return { body: `Hello, ${name}!` };
 }
 
-app.http('fnsamplecontextlogs', {
+app.http('fnsamplelogscontext', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
-    handler: wrapAsWebTransaction('/fnsamplecontextlogs', handler)
+    handler: wrapAsWebTransaction('/fnsamplelogscontext', handler)
 });
