@@ -4,16 +4,16 @@
 			"path": ".."
 		},
 		{
-			"path": "../sample-typescript"
+			"path": "../sample-typescript@azure-functions@v4"
 		},
 		{
 			"path": "../sample-java"
 		},
 		{
-			"path": "../sample-javascript"
+			"path": "../sample-javascript@azure-functions@v4"
 		},
 		{
-			"path": "../sample-typescript2"
+			"path": "../sample-typescript@azure-functions@v3"
 		}
 	],
 	"settings": {

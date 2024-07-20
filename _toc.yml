@@ -6,9 +6,10 @@ root: README.md
 chapters:
   - file: sample-java/README.md
     sections:
-      - file: sample-java/INTRUMENTATION.md
-  - file: sample-python/README.md
-  - file: sample-javascript/README.md
+      - file: sample-java/INSTRUMENTATION.md
+  - file: sample-javascript@azure-functions@v4/README.md
+    sections:
+      - file: sample-javascript@azure-functions@v4/INSTRUMENTATION.md
   - file: sample-typescript@azure-functions@v3/README.md
   - file: sample-typescript@azure-functions@v4/README.md
   - file: CODE_OF_CONDUCT.md

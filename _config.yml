@@ -16,7 +16,7 @@ exclude_patterns:
   - .vscode
   - .venv
   - sample-java/target
-  - sample-javascript/node_modules
+  - sample-javascript@azure-functions@v4/node_modules
   - sample-typescript@azure-functions@v3/node_modules
   - sample-typescript@azure-functions@v4/node_modules
 
