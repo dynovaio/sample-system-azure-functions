@@ -5,6 +5,9 @@ format: jb-book
 root: README.md
 chapters:
   - file: sample-java/README.md
+    sections:
+      - file: sample-java/INTRUMENTATION.md
+  - file: sample-python/README.md
   - file: sample-javascript/README.md
   - file: sample-typescript@azure-functions@v3/README.md
   - file: sample-typescript@azure-functions@v4/README.md
