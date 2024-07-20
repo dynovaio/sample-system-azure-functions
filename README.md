@@ -4,15 +4,15 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE.txt)
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://dynovaio.github.io/sample-system-azure-functions)
 
-# Sample System: Azure Function Apps
+# Azure Function Apps Samples
 
-This repository contains many sample Azure Function Apps that demonstrate how to
-implement the New Relic agent within Azure Function App.
+This repository contains many Azure Function Apps samples that demonstrate how
+to implement the New Relic agent within Azure Function App.
 
 By default New Relic does not support Azure Function Apps, but it is possible
-to use the New Relic agent in an Azure Function by using the New Relic agent
-API. This repository contains examples of how to use the New Relic agent API
-for functions written in Java, JavaScript and TypeScript.
+to use the New Relic APM Agent in an Azure Function by using its API. This
+repository contains examples of how to use them in Azure Functions Apps
+written in Java, JavaScript and TypeScript.
 
 ## Requirements
 
