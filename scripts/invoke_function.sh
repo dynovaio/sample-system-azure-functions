@@ -101,7 +101,7 @@ else
 fi
 
 # Get Function App URL
-FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+FUNCTION_APP_NAME="fn-${${PROJECT_NAME%@*}%@*}-${RANDOM_SUFFIX}"
 
 FUNCTION_APP_URL=$(
     az functionapp function show \

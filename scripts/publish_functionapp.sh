@@ -45,7 +45,6 @@ if [ -z "$1" ]; then
     exit 1
 else
     PROJECT_NAME="$1"
-    FUNCTION_APP_NAME="fn-${PROJECT_NAME}"
 fi
 
 # Check if function runtime is provided
@@ -79,7 +78,7 @@ else
 fi
 
 # Publish function app
-FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+FUNCTION_APP_NAME="fn-${${PROJECT_NAME%@*}%@*}-${RANDOM_SUFFIX}"
 
 if [ "${function_app_runtime}" == "java" ]; then
     # Build

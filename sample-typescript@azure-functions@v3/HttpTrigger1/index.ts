@@ -1,19 +1,21 @@
 import * as newrelic from 'newrelic';
-import { wrapAsyncAsWebTransaction, instrumentAzureFuntionsInvocationContext, patchContext } from '../shared/observability';
+import { wrapAsWebTransaction, instrumentAzureFuntionsInvocationContext, patchContext } from '../shared/observability';
 newrelic.instrument('@azure/functions', instrumentAzureFuntionsInvocationContext);
 
+const azureFunctionsModule = require('@azure/functions');
+
 import { Context, HttpRequest } from "@azure/functions"
-import * as azureFunctionsModule from '@azure/functions';
 
 class HttpTrigger {
-    static function = wrapAsyncAsWebTransaction('HttpTrigger1', HttpTrigger.handler);
+    static function = wrapAsWebTransaction('HttpTrigger1', HttpTrigger.handler);
 
     static async handler(context: Context, req: HttpRequest): Promise<void> {
-        console.log(azureFunctionsModule);
+        console.log(azureFunctionsModule.prototype);
+        console.log(azureFunctionsModule.__proto__);
         console.log("----------")
-        console.log(typeof context, context.constructor.name, context.constructor.name);
+        console.log(typeof context, context.constructor.name, context.constructor.name, context.constructor.toString());
         console.log("----------")
-        context = patchContext(context);
+        // context = patchContext(context);
 
         context.log.error('HTTP trigger function processed a request.');
         context.log.warn('HTTP trigger function processed a request.');

@@ -35,13 +35,17 @@ The principal components of this repository are organized as follows:
 ├── scripts
 ├── sample-java
 ├── sample-javascript
-└── sample-typescript
+├── sample-typescript@azure-functions@v3
+└── sample-typescript@azure-functions@v4
 ```
 
 * `scripts`: Contains scripts to automate the deployment of the Azure Functions.
 * `sample-java`: Contains a sample Azure Function written in Java.
 * `sample-javascript`: Contains a sample Azure Function written in JavaScript.
-* `sample-typescript`: Contains a sample Azure Function written in TypeScript.
+* `sample-typescript@azure-functions@3`: Contains a sample Azure Function
+    written in TypeScript using @azure/functions version 3.x.y.
+* `sample-typescript@azure-functions@4`: Contains a sample Azure Function
+    written in TypeScript using @azure/functions version 4.x.y.
 
 For detailed information about each sample, see the `README.md` file in each
 folder.

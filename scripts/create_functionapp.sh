@@ -100,7 +100,7 @@ else
 fi
 
 # Create storage account
-STORAGE_ACCOUNT_NAME="$(echo "${PROJECT_NAME}" | sed 's/[ -_]//g')"
+STORAGE_ACCOUNT_NAME="$(echo "${${PROJECT_NAME%@*}%@*}" | sed 's/[ -_]//g')"
 STORAGE_ACCOUNT_NAME="sa${STORAGE_ACCOUNT_NAME}data${RANDOM_SUFFIX}"
 STORAGE_ACCOUNT_NAME="$(echo "${STORAGE_ACCOUNT_NAME}" | fold -w 24 | head -n 1)"
 
@@ -118,7 +118,7 @@ else
 fi
 
 # Create app insights
-APP_INSIGHTS_NAME="ai$(echo ${PROJECT_NAME} | sed 's/[ -_]//g')${RANDOM_SUFFIX}"
+APP_INSIGHTS_NAME="ai$(echo ${${PROJECT_NAME%@*}%@*} | sed 's/[ -_]//g')${RANDOM_SUFFIX}"
 
 az monitor app-insights component create \
     --app "${APP_INSIGHTS_NAME}" \
@@ -142,7 +142,7 @@ APP_INSIGHTS_INSTRUMENTATION_KEY=$(
 )
 
 # Create function app
-FUNCTION_APP_NAME="fn-${PROJECT_NAME}-${RANDOM_SUFFIX}"
+FUNCTION_APP_NAME="fn-${${PROJECT_NAME%@*}%@*}-${RANDOM_SUFFIX}"
 
 az functionapp create \
     --name "${FUNCTION_APP_NAME}" \

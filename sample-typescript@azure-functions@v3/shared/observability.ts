@@ -197,36 +197,26 @@ export function instrumentAzureFuntionsInvocationContext(shim: any, module: any)
     const agent = shim.agent
     const config = agent.config
 
-    if (!config?.application_logging?.enabled) {
+    if (!config?.application_logging?.enabled || (config?.application_logging?.enabled && !config?.application_logging?.local_decorating?.enabled)) {
         console.log('Application logging is not enabled. Skipping instrumentation of Azure Functions invocation context logging.')
         return
     }
 
-    const contextPrototype = module.InvocationContext.prototype;
-    const logFunctions = ['log', 'trace', 'debug', 'info', 'warn', 'error']
+    const contextPrototype = module;
 
-    logFunctions.forEach(function (logFunctionName: string) {
-        shim.wrap(
-            contextPrototype,
-            logFunctionName,
-            function wrapLog(shim: any, logFunction: any) {
-                return function wrappedLog() {
-                    const args = shim.argsToArray.apply(shim, arguments)
-                    const newrelicMetadata = newrelic.agent.getNRLinkingMetadata()
-
-                    let [head, ...tail] = args;
-
-                    if (hasSubtitutionPlaceHolders(head)) {
-                        head = `${head}${newrelicMetadata}`
-                    } else {
-                        tail = [...tail, newrelicMetadata]
-                    }
-
-                    logFunction.apply(this, [head, ...tail])
-                }
+    shim.wrap(
+        contextPrototype,
+        'CreateContextAndInputs',
+        function wrapSetup(shim: any, oldSetup: any) {
+            return function wrappedSetup() {
+                const args = shim.argsToArray.apply(shim, arguments)
+                console.log("----------")
+                console.log("Instrument setup!!")
+                console.log("----------")
+                oldSetup.apply(this, args)
             }
-        )
-    })
+        }
+    )
 }
 
 export const patchContext = (context: any): any => {
