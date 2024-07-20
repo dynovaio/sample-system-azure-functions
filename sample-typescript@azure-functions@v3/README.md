@@ -27,7 +27,8 @@ To run the sample locally, follow these steps:
 
 1. Clone this repository to your local machine.
 
-2. Open a terminal and navigate to the `sample-TypeScript` directory.
+2. Open a terminal and navigate to the `sample-typescript@azure-functions@v3`
+    directory.
 
 3. Copy the `template.settings.json` file to `local.settings.json` and update
     the values of the variables according to your requirements.
@@ -52,7 +53,7 @@ To run the sample locally, follow these steps:
    ```
 
 5. Open a browser and navigate to
-    `http://localhost:7071/api/fnsampleTypeScript`.
+    `http://localhost:7071/api/fnsamplebase`.
 
 6. Test the function by sending a request to the endpoint.
 
@@ -60,7 +61,7 @@ To run the sample locally, follow these steps:
    for i in `seq 1 10`; do
        curl \
            --request GET \
-           --url http://localhost:7071/api/fnsampleTypeScript?name=Azure \
+           --url http://localhost:7071/api/fnsamplebase?name=Azure \
            --header 'Content-Type: application/json';
        echo "";
        sleep 1;
@@ -79,50 +80,58 @@ To deploy the sample to Azure, follow these steps:
 
 2. Run the following command to create a resource group:
 
-   ```bash
-   # Do not modify the values of the variables
-   project_name="sample-TypeScript"
-   function_name="fnsampleTypeScript"
-   function_app_runtime="node"
-   function_app_runtime_version="20"
+    ```bash
+    # Do not modify the values of the variables
+    project_name="sample-typescript@azure-functions@v3"
+    function_app_runtime="node"
+    function_app_runtime_version="20"
 
-   # Modify the values of the variables according to your requirements
-   location="eastus"
-   resource_group_name="my-resource-group"
-   new_relic_license_key="YOUR_NEW_RELIC_LICENSE_KEY"
-   execution_times=10
-   execution_interval=1
+    # Modify the values of the variables according to your requirements
+    location="eastus"
+    resource_group_name="my-resource-group"
+    new_relic_license_key="YOUR_NEW_RELIC_LICENSE_KEY"
+    execution_times=10
+    execution_interval=1
 
-   # Execute the scripts as follows
-   ./scripts/create_resourcegroup.sh \
-       $resource_group_name \
-       $location
+    # Execute the scripts as follows
+    ./scripts/create_resourcegroup.sh \
+        $resource_group_name \
+        $location
 
-   ./scripts/create_functionapp.sh \
-       $project_name \
-       $function_app_runtime \
-       $function_app_runtime_version \
-       $resource_group_name \
-       $location
+    ./scripts/create_functionapp.sh \
+        $project_name \
+        $function_app_runtime \
+        $function_app_runtime_version \
+        $resource_group_name \
+        $location
 
-   ./scripts/configure_functionapp.sh \
-       $project_name \
-       $function_app_runtime \
-       $resource_group_name \
-       $new_relic_license_key
+    ./scripts/configure_functionapp.sh \
+        $project_name \
+        $function_app_runtime \
+        $resource_group_name \
+        $new_relic_license_key
 
-   ./scripts/publish_functionapp.sh \
-       $project_name \
-       $function_app_runtime \
-       $resource_group_name
+    ./scripts/publish_functionapp.sh \
+        $project_name \
+        $function_app_runtime \
+        $resource_group_name
 
-   ./scripts/invoke_function.sh \
-       $project_name \
-       $function_name \
-       $resource_group_name \
-       $execution_times \
-       $execution_interval
-   ```
+    # Launch docker dabase service
+    docker-compose \
+        -f sample-typescript@azure-functions@v3/docker-compose.ym \
+        up -d
+
+    # Select the function you whant to invoke
+    function_name="fnsamplebase"
+
+
+    ./scripts/invoke_function.sh \
+        $project_name \
+        $function_name \
+        $resource_group_name \
+        $execution_times \
+        $execution_interval
+    ```
 
 
 [href:nvm]: https://github.com/nvm-sh/nvm

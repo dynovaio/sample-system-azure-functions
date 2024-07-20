@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  database:
+    image: postgres:12
+    env_file:
+      - .env.db
+    networks:
+      - database-network
+    ports:
+      - 5432:5432
+    volumes:
+      - database-data:/var/lib/postgresql/data
+      - ./populate.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  database-network:
+    driver: bridge
+
+volumes:
+  database-data:
+    driver: local

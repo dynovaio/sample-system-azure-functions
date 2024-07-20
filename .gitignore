@@ -7,3 +7,4 @@ _*
 !_config.yml
 !_toc.yml
 !.github
+!.env.template

@@ -1,36 +1,71 @@
-import * as newrelic from 'newrelic';
-import { wrapAsWebTransaction, instrumentAzureFuntionsInvocationContext, patchContext } from '../shared/observability';
-newrelic.instrument('@azure/functions', instrumentAzureFuntionsInvocationContext);
+import { wrapAsWebTransaction, wrapAsSegment } from "../shared/observability";
+import { azureFunctionsInstrumentation } from "../shared/observability/instrumentations";
 
-const azureFunctionsModule = require('@azure/functions');
+import { getUser, createUser } from "../shared/database";
 
 import { Context, HttpRequest } from "@azure/functions"
 
 class HttpTrigger {
-    static function = wrapAsWebTransaction('fnsamplebase', HttpTrigger.handler);
+    static function = wrapAsWebTransaction('fnsamplebase', HttpTrigger.handler)
 
     static async handler(context: Context, req: HttpRequest): Promise<void> {
-        console.log(azureFunctionsModule.prototype);
-        console.log(azureFunctionsModule.__proto__);
-        console.log("----------")
-        console.log(typeof context, context.constructor.name, context.constructor.name, context.constructor.toString());
-        console.log("----------")
-        // context = patchContext(context);
+        context = azureFunctionsInstrumentation.patchAzureContext(context)
 
-        context.log.error('HTTP trigger function processed a request.');
-        context.log.warn('HTTP trigger function processed a request.');
-        context.log.info('HTTP trigger function processed a request.');
-        context.log.verbose('HTTP trigger function processed a request.');
+        context.log.error('HTTP trigger function processed a request.')
+        context.log.warn('HTTP trigger function processed a request.')
+        context.log.info('HTTP trigger function processed a request.')
+        context.log.verbose('HTTP trigger function processed a request.')
 
-        const name = (req.query.name || (req.body && req.body.name));
-        const responseMessage = name
-            ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-            : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
+        try {
+            if (req.method === 'GET') {
+                return wrapAsSegment('HttpTrigger/getUser', HttpTrigger.getUser)(context, req)
+            }
+
+            if (req.method === 'POST') {
+                return wrapAsSegment('HttpTrigger/createUser', HttpTrigger.createUser)(context, req)
+            }
+
+            context.res = {
+                status: 405,
+                body: 'Method not allowed'
+            }
+        } catch (error) {
+            context.log.error('Error processing request', error)
+            context.res = {
+                status: 500,
+                body: 'Internal server error'
+            }
+            throw error;
+        }
+    }
+
+    static async createUser(context: Context, req: HttpRequest): Promise<void> {
+        const userData = req.body
+        const user = await createUser(userData)
 
         context.res = {
-            // status: 200, /* Defaults to 200 */
-            body: responseMessage
-        };
+            status: 201,
+            body: user
+        }
+    }
+
+    static async getUser(context: Context, req: HttpRequest): Promise<void> {
+        const userId = parseInt(req.query.id)
+
+        if (!userId) {
+            context.res = {
+                status: 400,
+                body: 'User id is required'
+            }
+            return
+        }
+
+        const user = await getUser(userId)
+
+        context.res = {
+            status: user ? 200 : 404,
+            body: user
+        }
     }
 }
 
