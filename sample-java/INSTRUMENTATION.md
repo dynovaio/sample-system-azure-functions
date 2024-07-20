@@ -1,8 +1,8 @@
 ![Dynova](https://gitlab.com/softbutterfly/open-source/open-source-office/-/raw/master/assets/dynova/dynova-header-1.png)
 
-# How to instrument your Azure Function with the New Relic APM agent for Java
+# How to instrument your Azure Function App Java with the New Relic APM agent for Java
 
-To instrument your own Azure Function with the New Relic APM agent for Java,
+To instrument your own Azure Function App Java with the New Relic APM agent for Java,
 follow these steps:
 
 1. Add the New Relic APM agent for Java to your project. You can do this by

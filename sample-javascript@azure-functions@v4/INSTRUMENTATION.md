@@ -1,8 +1,8 @@
 ![Dynova](https://gitlab.com/softbutterfly/open-source/open-source-office/-/raw/master/assets/dynova/dynova-header-1.png)
 
-# How to instrument your Azure Function with the New Relic APM agent for Node
+# How to instrument your Azure Function App Javascript with the New Relic APM agent for Node
 
-I this guide you will learn how to implement the New Relic APM agent in an Azure Function App written in JavaScript.
+In this guide you will learn how to implement the New Relic APM agent in an Azure Function App written in JavaScript.
 
 ## Instrumentation
 
