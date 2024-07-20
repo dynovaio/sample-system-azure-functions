@@ -50,6 +50,11 @@ The log in context is a feature that allows you to correlate logs with the
 distributed traces in the New Relic APM agent. To use this feature, you need
 can use many metods depending on the library you are using.
 
+Keep in mind that to fully enable the logs in context feature, you need to
+stream your logs to New Relic. To do this, check the repository of the
+[NewRelic log forawrder ↗][href:dynovanrlogforwarder] project from
+[Dynova ↗][href:dynova].
+
 #### Using the InvocationContext logger
 
 The `InvocationContext` class from '@azure/functions' package provides a
@@ -88,12 +93,22 @@ app.http('fnsamplecontextlogs', {
 
 #### Using the winston logger
 
-To be done
+The winsotn logger is a popular logger for Node.js applications. If you are
+using the winston logger with versions greater than 3.0.0, the newrelic agent
+supports the winston logger out of the box since agent version 8.11.0.
+
+Check the New Relic compatibility requirements for the Node.js agent
+([↗][href:nodecompat]).
 
 #### Using the pino logger
 
-To be done
+The pino logger is a fast logger for Node.js applications. If you are using the
+pino logger. If you are using the pino logger with versions greater than 7.0.0,
+the newrelic agent supports the pino logger out of the box since agent version
+8.11.0.
 
+Check the New Relic compatibility requirements for the Node.js agent
+([↗][href:nodecompat]).
 
 #### What about `console.log`?
 
@@ -127,3 +142,8 @@ app.http('fnsamplelogconsole', {
 ### Sotrage and segments
 
 To be done
+
+
+[href:dynova]: https://dynova.io
+[href:dynovanrlogforwarder]: https://github.com/dynovaio/newrelic-logforwarder
+[href:nodecompat]: https://docs.newrelic.com/docs/apm/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent/#instrumented-modules

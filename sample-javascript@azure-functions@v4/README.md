@@ -122,6 +122,7 @@ To deploy the sample to Azure, follow these steps:
        $execution_interval
    ```
 
+
 [href:nvm]: https://github.com/nvm-sh/nvm
 [href:azfct]: https://github.com/Azure/azure-functions-core-tools
 [href:vscode]: https://code.visualstudio.com

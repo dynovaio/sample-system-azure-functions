@@ -1,9 +1,12 @@
 const { wrapAsWebTransaction } = require('../shared/observability');
 
 const { app } = require('@azure/functions');
+const pino = require('pino')
+
+const logger = pino()
 
 const handler = async (request, context) => {
-    context.log(`Http function processed request for url "${request.url}"`)
+    logger.info(`Http function processed request for url "${request.url}"`)
 
     const name = request.query.get('name') || await request.text() || 'world';
 
