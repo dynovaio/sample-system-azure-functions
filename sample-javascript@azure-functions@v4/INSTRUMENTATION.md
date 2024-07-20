@@ -139,10 +139,6 @@ app.http('fnsamplelogconsole', {
 });
 ```
 
-### Sotrage and segments
-
-To be done
-
 
 [href:dynova]: https://dynova.io
 [href:dynovanrlogforwarder]: https://github.com/dynovaio/newrelic-logforwarder
