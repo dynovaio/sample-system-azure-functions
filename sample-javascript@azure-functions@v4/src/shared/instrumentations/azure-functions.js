@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 SoftButterfly SAC. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+'use strict'
+
 const newrelic = require('newrelic');
 
 const hasSubtitutionPlaceHolders = (message) => {
@@ -5,7 +11,7 @@ const hasSubtitutionPlaceHolders = (message) => {
         return false;
     }
 
-    const placeholders = ['%o', '%O', '%d', '%i', '%f', '%s', '%c'];
+    const placeholders = ['%o', '%O', '%d', '%i', '%f', '%s', '%c']
     return placeholders.some(
         (placeholder) => message.includes(placeholder)
     );
