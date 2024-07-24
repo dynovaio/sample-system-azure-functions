@@ -1,7 +1,14 @@
-import { wrapAsWebTransaction, wrapAsSegment } from "../shared/observability";
-import { azureFunctionsInstrumentation } from "../shared/observability/instrumentations";
+import * as newrelic from 'newrelic'
 
-import { getUser, createUser } from "../shared/database";
+import { azureFunctionsInstrumentation, knexInstrumentation } from "../shared/observability/instrumentations"
+newrelic.instrumentDatastore({
+    moduleName: 'knex',
+    onRequire: knexInstrumentation.instrument
+})
+
+import { wrapAsWebTransaction, wrapAsSegment } from "../shared/observability"
+
+import { getUser, createUser } from "../shared/database"
 
 import { Context, HttpRequest } from "@azure/functions"
 

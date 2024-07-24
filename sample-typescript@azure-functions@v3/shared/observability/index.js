@@ -1,19 +1,25 @@
-const newrelic = require('newrelic');
+/*
+ * Copyright 2024 SoftButterfly SAC. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+'use strict'
+
+const newrelic = require('newrelic')
 
 const wrapAsWebTransaction = (url, handler) => {
     function wrappedHandler (...args) {
-        const wrappedArguments = args;
+        const wrappedArguments = args
 
-        return newrelic.startWebTransaction(url, function () {
-            let transaction = newrelic.getTransaction();
+        return newrelic.startWebTransaction(url, async function () {
+            let transaction = newrelic.getTransaction()
 
             try {
-                return handler.apply(this, wrappedArguments);
+                return await handler.call(this, ...wrappedArguments)
             } catch (error) {
-                newrelic.noticeError(error);
-                throw error;
+                newrelic.noticeError(error)
+                throw error
             } finally {
-                transaction.end();
+                transaction.end()
             }
         })
     }
@@ -23,44 +29,44 @@ const wrapAsWebTransaction = (url, handler) => {
 
 const wrapAsBackgroundTransaction = (name, handler) => {
     function wrappedHandler (...args) {
-        const wrappedArguments = args;
+        const wrappedArguments = args
 
-        return newrelic.startBackgroundTransaction(name, function () {
-            let transaction = newrelic.getTransaction();
+        return newrelic.startBackgroundTransaction(name, async function () {
+            let transaction = newrelic.getTransaction()
 
             try {
-                return handler.apply(this, wrappedArguments);
+                return await handler.call(this, ...wrappedArguments)
             } catch (error) {
-                newrelic.noticeError(error);
+                newrelic.noticeError(error)
                 throw error;
             } finally {
-                transaction.end();
+                transaction.end()
             }
         })
     }
 
-    return wrappedHandler;
+    return wrappedHandler
 }
 
 const wrapAsSegment = (name, handler) => {
     function wrappedHandler (...args) {
-        const wrappedArguments = args;
+        const wrappedArguments = args
 
-        return newrelic.startSegment(name, true, function () {
+        return newrelic.startSegment(name, true, async function () {
             try {
-                return handler.apply(this, wrappedArguments);
+                return await handler.call(this, ...wrappedArguments)
             } catch (error) {
-                newrelic.noticeError(error);
-                throw error;
+                newrelic.noticeError(error)
+                throw error
             }
         })
     }
 
-    return wrappedHandler;
+    return wrappedHandler
 }
 
 module.exports = {
     wrapAsWebTransaction,
     wrapAsBackgroundTransaction,
-    wrapAsSegment,
+    wrapAsSegment
 }

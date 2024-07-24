@@ -30,21 +30,37 @@ To run the sample locally, follow these steps:
 2. Open a terminal and navigate to the `sample-typescript@azure-functions@v3`
     directory.
 
-3. Copy the `template.settings.json` file to `local.settings.json` and update
+3. Copy the `.env.template` file to `.env.db` and update the values of the
+    variables according to your requirements.
+
+   ```bash
+   cp .env.template .env.db
+   ```
+
+4. Run the `docker compose` command to start the database service.
+
+   ```bash
+   docker compose \
+       -f docker-compose.yml \
+       up -d
+   ```
+
+5. Copy the `template.settings.json` file to `local.settings.json` and update
     the values of the variables according to your requirements.
 
    ```bash
    cp template.settings.json local.settings.json
    ```
 
-3. Install the required tools. Assuming you have `nvm` installed, you can
+
+6. Install the required tools. Assuming you have `nvm` installed, you can
     install node 18 by running the following commands:
 
    ```bash
    nvm install $(cat .nvmrc)
    ```
 
-4. Run for local development
+7. Run for local development
 
    ```bash
    nvm use $(cat .nvmrc)
@@ -52,10 +68,10 @@ To run the sample locally, follow these steps:
    npm run start
    ```
 
-5. Open a browser and navigate to
+8. Open a browser and navigate to
     `http://localhost:7071/api/fnsamplebase`.
 
-6. Test the function by sending a request to the endpoint.
+9. Test the function by sending a request to the endpoint.
 
    ```bash
    for i in `seq 1 10`; do
@@ -68,9 +84,9 @@ To run the sample locally, follow these steps:
    done
    ```
 
-7. Check the logs in the terminal to see the output of the function.
+10. Check the logs in the terminal to see the output of the function.
 
-8. To stop the function, press `Ctrl+C` in the terminal.
+11. To stop the function, press `Ctrl+C` in the terminal.
 
 ## Deploy to Azure
 
@@ -123,7 +139,6 @@ To deploy the sample to Azure, follow these steps:
 
     # Select the function you whant to invoke
     function_name="fnsamplebase"
-
 
     ./scripts/invoke_function.sh \
         $project_name \
