@@ -83,7 +83,9 @@ else
 fi
 
 # Configure the function app settings
-FUNCTION_APP_NAME="fn-${${PROJECT_NAME%@*}%@*}-${RANDOM_SUFFIX}"
+FUNCTION_APP_NAME="${PROJECT_NAME%@*}"
+FUNCTION_APP_NAME="${FUNCTION_APP_NAME%@*}"
+FUNCTION_APP_NAME="fn-${FUNCTION_APP_NAME}-${RANDOM_SUFFIX}"
 
 if [ "${FUNCTION_APP_RUNTIME}" == "java" ]; then
     az functionapp config appsettings set \

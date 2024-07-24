@@ -78,7 +78,9 @@ else
 fi
 
 # Publish function app
-FUNCTION_APP_NAME="fn-${${PROJECT_NAME%@*}%@*}-${RANDOM_SUFFIX}"
+FUNCTION_APP_NAME="${PROJECT_NAME%@*}"
+FUNCTION_APP_NAME="${FUNCTION_APP_NAME%@*}"
+FUNCTION_APP_NAME="fn-${FUNCTION_APP_NAME}-${RANDOM_SUFFIX}"
 
 if [ "${function_app_runtime}" == "java" ]; then
     # Build
