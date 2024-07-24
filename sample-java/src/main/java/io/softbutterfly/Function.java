@@ -31,12 +31,12 @@ import com.newrelic.api.agent.Config;
  */
 public class Function {
     /**
-     * This function listens at endpoint "/api/fnsamplejava". Two ways to invoke it using "curl" command in bash:
-     * 1. curl -d "HTTP Body" {your host}/api/fnsamplejava
-     * 2. curl "{your host}/api/fnsamplejava?name=HTTP%20Query"
+     * This function listens at endpoint "/api/fnsamplebase". Two ways to invoke it using "curl" command in bash:
+     * 1. curl -d "HTTP Body" {your host}/api/fnsamplebase
+     * 2. curl "{your host}/api/fnsamplebase?name=HTTP%20Query"
      */
     @Trace(dispatcher = true)
-    @FunctionName("fnsamplejava")
+    @FunctionName("fnsamplebase")
     public HttpResponseMessage run(
             @HttpTrigger(
                 name = "req",
@@ -45,7 +45,7 @@ public class Function {
                 HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) throws IOException {
         context.getLogger().info("Java HTTP trigger processed a request.");
-        NewRelic.setTransactionName("Function", "/fnsamplejava");
+        NewRelic.setTransactionName("Function", "/fnsamplebase");
 
         // Parse query parameter
         final String query = request.getQueryParameters().get("name");

@@ -52,7 +52,7 @@ To run the sample locally, follow these steps:
    mvn azure-functions:run
    ```
 
-5. Open a browser and navigate to `http://localhost:7071/api/fnsamplejava`.
+5. Open a browser and navigate to `http://localhost:7071/api/fnsamplebase`.
 
 6. Test the function by sending a request to the endpoint.
 
@@ -60,7 +60,7 @@ To run the sample locally, follow these steps:
    for i in `seq 1 10`; do
        curl \
            --request GET \
-           --url http://localhost:7071/api/fnsamplejava?name=Azure \
+           --url http://localhost:7071/api/fnsamplebase?name=Azure \
            --header 'Content-Type: application/json';
        echo "";
        sleep 1;
@@ -82,7 +82,7 @@ To deploy the sample to Azure, follow these steps:
     ```bash
     # Do not modify the values of the variables
     project_name="sample-java"
-    function_name="fnsamplejava"
+    function_name="fnsamplebase"
     function_app_runtime="java"
     function_app_runtime_version="17"
 
