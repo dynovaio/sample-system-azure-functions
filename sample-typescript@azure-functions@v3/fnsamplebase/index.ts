@@ -25,11 +25,11 @@ class HttpTrigger {
 
         try {
             if (req.method === 'GET') {
-                return wrapAsSegment('HttpTrigger/getUser', HttpTrigger.getUser)(context, req)
+                return await wrapAsSegment('HttpTrigger/getUser', HttpTrigger.getUser)(context, req)
             }
 
             if (req.method === 'POST') {
-                return wrapAsSegment('HttpTrigger/createUser', HttpTrigger.createUser)(context, req)
+                return await wrapAsSegment('HttpTrigger/createUser', HttpTrigger.createUser)(context, req)
             }
 
             context.res = {
@@ -76,4 +76,4 @@ class HttpTrigger {
     }
 }
 
-export default HttpTrigger.function;
+export default HttpTrigger.function

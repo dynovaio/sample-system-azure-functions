@@ -73,16 +73,16 @@ To run the sample locally, follow these steps:
 
 9. Test the function by sending a request to the endpoint.
 
-   ```bash
-   for i in `seq 1 10`; do
-       curl \
-           --request GET \
-           --url http://localhost:7071/api/fnsamplebase?name=Azure \
-           --header 'Content-Type: application/json';
-       echo "";
-       sleep 1;
-   done
-   ```
+    ```bash
+    for i in `seq 1 10`; do
+        curl \
+            --request GET \
+            --url "http://localhost:7071/api/fnsamplebase?id=$(($i % 10))" \
+            --header 'Content-Type: application/json';
+        echo "";
+        sleep 1;
+    done
+    ```
 
 10. Check the logs in the terminal to see the output of the function.
 

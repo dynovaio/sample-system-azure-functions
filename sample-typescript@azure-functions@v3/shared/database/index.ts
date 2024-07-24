@@ -7,7 +7,7 @@ const config = {
     client: 'pg',
     connection: {
         host: process.env.DATABASE_HOST,
-        port: parseInt(process.env.DATABASE_PORT),
+        port: parseInt(process.env.DATABASE_PORT || '5432'),
         password: process.env.DATABASE_PASSWORD,
         user: process.env.DATABASE_USER,
         database: process.env.DATABASE_NAME,
