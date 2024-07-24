@@ -11,5 +11,7 @@ chapters:
     sections:
       - file: sample-javascript@azure-functions@v4/INSTRUMENTATION.md
   - file: sample-typescript@azure-functions@v3/README.md
+    sections:
+      - file: sample-typescript@azure-functions@v3/INSTRUMENTATION.md
   - file: sample-typescript@azure-functions@v4/README.md
   - file: CODE_OF_CONDUCT.md
