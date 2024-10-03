@@ -18,6 +18,9 @@ class HttpTrigger {
     static async handler(context: Context, req: HttpRequest): Promise<void> {
         context = azureFunctionsInstrumentation.patchAzureContext(context)
 
+        context.log.info('Context:', context.constructor?.name === 'c');
+        context.log.info('Request:', req.constructor?.name === 'c');
+
         context.log.error('HTTP trigger function processed a request.')
         context.log.warn('HTTP trigger function processed a request.')
         context.log.info('HTTP trigger function processed a request.')

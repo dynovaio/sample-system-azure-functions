@@ -87,8 +87,6 @@ To deploy the sample to Azure, follow these steps:
     location="eastus"
     resource_group_name="my-resource-group"
     new_relic_license_key="YOUR_NEW_RELIC_LICENSE_KEY"
-    execution_times=10
-    execution_interval=1
 
     # Execute the scripts as follows
     ./scripts/create_resourcegroup.sh \
@@ -113,7 +111,11 @@ To deploy the sample to Azure, follow these steps:
         $function_app_runtime \
         $resource_group_name
 
-    # Select the function you whant to invoke
+    # Function execution parameters
+    execution_times=10
+    execution_interval=1
+
+    # Select the function you want to invoke
     function_name="fnsamplebase"
     # function_name="fnsamplelogsconsole"
     # function_name="fnsamplelogscontext"

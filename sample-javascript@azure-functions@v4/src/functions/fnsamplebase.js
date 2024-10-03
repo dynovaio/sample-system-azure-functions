@@ -1,5 +1,4 @@
 const { wrapAsWebTransaction } = require('../shared/observability');
-
 const { app } = require('@azure/functions');
 
 const handler = async (request, context) => {
